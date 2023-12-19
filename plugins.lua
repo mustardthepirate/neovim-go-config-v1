@@ -40,7 +40,16 @@ local plugins = {
                 relculright = true,
                 -- setopt = true,
                 segments = {
-                  {text = {builtin.foldfunc}, click = "v:lua.ScFa"},
+                  {
+                    text = {
+                      builtin.foldfunc,
+                    },
+                    condition = {
+                      true,
+                      function(args) return args.fold.width > 0 end,
+                    },
+                  },
+                  {text = { " " }, hl = "FoldColumn" },
                   {text = {"%s"}, click = "v:lua.ScSa"},
                   {text = {builtin.lnumfunc, " "}, click = "v:lua.ScLa"}
                 }
