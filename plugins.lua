@@ -24,9 +24,28 @@ local plugins = {
   },
   {
     "neovim/nvim-lspconfig",
+    -- UFO dependencies
+    dependencies = {
+      "kevinhwang91/promise-async",
+      "kevinhwang91/nvim-ufo",
+      "luukvbaal/statuscol.nvim",
+    },
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
+      --  UFO configs
+      local builtin = require("statuscol.builtin")
+            require("statuscol").setup(
+              {
+                relculright = true,
+                -- setopt = true,
+                segments = {
+                  {text = {builtin.foldfunc}, click = "v:lua.ScFa"},
+                  {text = {"%s"}, click = "v:lua.ScSa"},
+                  {text = {builtin.lnumfunc, " "}, click = "v:lua.ScLa"}
+                }
+              }
+            )
     end,
   },
   {
